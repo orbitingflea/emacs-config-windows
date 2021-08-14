@@ -1,4 +1,4 @@
-# Emacs ÅäÖÃÎÄ¼ş (Windows)
+# Emacs é…ç½®æ–‡ä»¶ (Windows)
 
 Needed packages:
 - selectrum
