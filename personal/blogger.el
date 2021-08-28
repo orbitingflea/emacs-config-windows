@@ -40,11 +40,11 @@
 
 (defun blogger-publish-region ()
   (interactive)
-  (if (eql (buffer-file-name) blogger-post-filename)
+  (if (let ((buf-target (get-file-buffer blogger-post-filename)))
+        (eql (current-buffer) buf-target))
       (progn (blogger-publish)
-             (blogger-kill-buffer))
+             (blogger-kill-buffer)
              (message "Called quick publisher."))
-    
     (let (( blog-text (if (use-region-p)
                           (buffer-substring (region-beginning) (region-end))
                         (buffer-string)) ))
@@ -52,7 +52,7 @@
       (write-region (remove-default-prefix blog-text)
                     nil blogger-post-filename 'append)
       (blogger-query-publish)
-    ))
+    )))
 (defalias 'publish-blog 'blogger-publish-region)
 
 
