@@ -10,13 +10,12 @@
 (setq-default default-tab-width 4
               tab-width 4)
 
-;; now we do not truncate lines by default, so no need to write this.
-;; (defun hook-do-not-truncate-lines ()
-;;   (setq truncate-lines nil))
-;; (add-hook 'org-mode-hook 'hook-do-not-truncate-lines)
-;; (add-hook 'text-mode-hook 'hook-do-not-truncate-lines)
-
+;; do not truncate lines by default, so no need to write this.
 (defun hook-truncate-lines ()
   (setq truncate-lines t))
 (add-hook 'c-mode-common-hook 'hook-truncate-lines)
+(add-hook 'python-mode-hook 'hook-truncate-lines)
 (add-hook 'dired-mode-hook 'hook-truncate-lines)
+
+;; move emacs to upper left corner
+(set-frame-position (frame-focus) 10 10)
