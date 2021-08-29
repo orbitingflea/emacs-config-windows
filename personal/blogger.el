@@ -1,8 +1,14 @@
 (setq blogger-post-filename "F:\\blog\\quick_publisher\\post.md")
-(setq scratch-message
-";; This buffer is for text that is not saved, and for Lisp evaluation.
-;; To create a file, visit it with C-x C-f and enter text in its buffer.")
 
+;; --- Original Setting ---
+;; (setq scratch-message
+;; ";; This buffer is for text that is not saved, and for Lisp evaluation.
+;; ;; To create a file, visit it with C-x C-f and enter text in its buffer.")
+
+;; --- New Setting ---
+(setq scratch-message
+";; 心情不错！写点什么？")
+(setq initial-scratch-message (concat scratch-message "\n\n"))
 
 (defun remove-default-prefix (str)
   (let ((n (length str)) (m (length scratch-message)))
