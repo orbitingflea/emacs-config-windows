@@ -43,6 +43,7 @@
 (defun hook-truncate-lines ()
   (setq truncate-lines t))
 (add-hook 'c-mode-common-hook 'hook-truncate-lines)
+(add-hook 'js-mode-hook 'hook-truncate-lines)
 (add-hook 'python-mode-hook 'hook-truncate-lines)
 (add-hook 'dired-mode-hook 'hook-truncate-lines)
 
