@@ -9,10 +9,9 @@
 
 (if (display-graphic-p)  
     (progn
-
       ;; Setting English Font
       (set-face-attribute
-       'default nil :font "Consolas 16")
+       'default nil :font "Consolas 13")
 
       ;; Chinese Font
       (dolist (charset '(kana han symbol cjk-misc bopomofo))
