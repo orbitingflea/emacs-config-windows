@@ -105,3 +105,6 @@
 
 ;; Treat clipboard input as UTF-8 string first; compound text next, etc.
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+
+;;; -------- Dired --------
+(setq dired-dwim-target t)
