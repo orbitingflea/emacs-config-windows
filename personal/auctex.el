@@ -1,29 +1,35 @@
 (defun my/latex-hook ()
-  ;; (turn-on-cdlatex)
+  ;; [disabled] ;; (turn-on-cdlatex)
   (turn-on-reftex)
-  (prettify-symbols-mode t))
+  (prettify-symbols-mode t)
+  (TeX-fold-mode 1))
+
+(server-start)
 
 (use-package tex
   :ensure auctex
   :defer t
   :custom
   (TeX-auto-save t)
-  (TeX-parse-self t) ; 自动解析 tex 文件
+  (TeX-parse-self t)
+  (reftex-plug-into-AUCTeX t)
   (TeX-PDF-mode t)
   (TeX-DVI-via-PDFTeX t)
-  (reftex-plug-into-AUCTeX t)
+  (TeX-source-correlate-mode t)
+  (TeX-source-correlate-method 'synctex)
+
   :config
   (add-hook 'LaTeX-mode-hook 'my/latex-hook)
-  ;; (setq TeX-auto-save t)
-  ;; (setq TeX-parse-self t)
-  (setq LaTeX-command-style '(("" "%(PDF)%(latex) -shell-escape %(file-line-error) %(extraopts) %S%(PDFout)")))
-  ;; [disabled] preview-gs-command "C:/Program Files/gs/gs10.00.0/bin/gswin64c.exe"
+  (setq LaTeX-command-style
+        '(("" "%(PDF)%(latex) -shell-escape %(file-line-error) %(extraopts) %S%(PDFout)")))
   (setq-default TeX-engine 'xetex)
-  ;; Custom PDF Viewer
-  ;; Append to TeX-view-program-list
-  (add-to-list 'TeX-view-program-list '("SumatraPaper" "python D:\\Program\\SumatraPaper\\SumatraPaper.py %o"))
-  (setq TeX-view-program-selection '((output-pdf "SumatraPaper")))
   (setq prettify-symbols-unprettify-at-point nil)
+
+  ;; [----- Custom PDF Viewer -----]
+  ;; Append to TeX-view-program-list
+  (add-to-list 'TeX-view-program-list
+               '("SumatraPaper" "python D:\\Program\\SumatraPaper\\SumatraPaper.py %o %b %n"))
+  (setq TeX-view-program-selection '((output-pdf "SumatraPaper")))
   )
 
 ;; (use-package cdlatex
