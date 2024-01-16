@@ -1,0 +1,45 @@
+import sys
+import shutil
+import os
+import subprocess
+
+# read terminal argument, the only argument is the path to a pdf file
+pdf_path = sys.argv[1]
+# to absolute
+pdf_path = os.path.abspath(pdf_path)
+# take its directory
+pdf_dir = os.path.dirname(pdf_path)
+# find pdf_dir/.display_name
+display_name_path = os.path.join(pdf_dir, ".display_name")
+# if file does not exist
+if not os.path.isfile(display_name_path):
+  skip_copy = True
+  # set display_name to the filename of pdf_path without .pdf
+  display_name = os.path.splitext(os.path.basename(pdf_path))[0]
+else:
+  # read the display name. The file only contains a single string
+  skip_copy = False
+  with open(display_name_path, "r") as f:
+    display_name = f.read()
+    # remove \n
+    display_name = display_name.strip()
+
+if not skip_copy:
+  shutil.copy(pdf_path, os.path.join(pdf_dir, display_name + ".pdf"))
+  # copy sync file
+  sync_path = os.path.splitext(pdf_path)[0] + ".synctex.gz"
+  if os.path.isfile(sync_path):
+    shutil.copy(sync_path, os.path.join(pdf_dir, display_name + ".synctex.gz"))
+
+# forward search.
+# %b: the path to the TeX file.
+tex_path = sys.argv[2]
+# %n: the line number
+line_num = sys.argv[3]
+
+# open it with sumatra. It is spawned as another process, and does not close when this program ends.
+# use subprocess
+subprocess.Popen(["SumatraPDF", "-reuse-instance",
+                  "-forward-search", tex_path, line_num,
+                  os.path.join(pdf_dir, display_name + ".pdf")],
+  shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
