@@ -4,23 +4,6 @@
 (set-frame-position (frame-focus) 10 10)
 (load-theme 'tango-dark)
 
-;;; -------- 设置字体 --------
-;; 仅在 GUI mode 下设置字体。
-
-(if (display-graphic-p)  
-    (progn
-      ;; Setting English Font
-      (set-face-attribute
-       'default nil :font "Consolas 13")
-
-      ;; Chinese Font
-      (dolist (charset '(kana han symbol cjk-misc bopomofo))
-        (set-fontset-font (frame-parameter nil 'font)
-                          charset
-                          (font-spec :family "Microsoft YaHei" :size 18)))
-    )
-)
-
 ;;; -------- 全局模式设置 --------
 
 (column-number-mode 1)
@@ -74,8 +57,6 @@
 (global-set-key (kbd "M-/") 'hippie-expand)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
-(global-set-key (kbd "C-s") 'isearch-forward-regexp)
-(global-set-key (kbd "C-r") 'isearch-backward-regexp)
 
 (setq save-interprogram-paste-before-kill t
       apropos-do-all t
@@ -83,12 +64,8 @@
       require-final-newline t
       visible-bell t
       load-prefer-newer t
-      ediff-window-setup-function 'ediff-setup-windows-plain
-      custom-file (expand-file-name "~/.emacs.d/custom.el"))
-
-;; load custom file
-(when (file-exists-p custom-file)
-  (load custom-file))
+      ediff-window-setup-function 'ediff-setup-windows-plain)
+;; custom-file (expand-file-name "~/.emacs.d/custom.el")  ;; overwritten
 
 ;;; -------- Always UTF-8 --------
 
