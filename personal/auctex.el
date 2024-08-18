@@ -15,6 +15,7 @@
   (reftex-plug-into-AUCTeX t)
   (TeX-PDF-mode t)
   (TeX-DVI-via-PDFTeX t)
+  (preview-auto-cache-preamble nil)
   (TeX-source-correlate-mode t)
   (TeX-source-correlate-method 'synctex)
 
@@ -22,7 +23,7 @@
   (add-hook 'LaTeX-mode-hook 'my/latex-hook)
   (setq LaTeX-command-style
         '(("" "%(PDF)%(latex) -shell-escape %(file-line-error) %(extraopts) %S%(PDFout)")))
-  (setq-default TeX-engine 'xetex)
+  (setq-default TeX-engine 'default)
   (setq prettify-symbols-unprettify-at-point nil)
 
   ;; [----- Custom PDF Viewer -----]
